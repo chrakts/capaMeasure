@@ -1,7 +1,43 @@
 #ifndef CAPAMEASURE_H
 #define CAPAMEASURE_H
 
+#include <avr/io.h>
+#include <stdbool.h>
+
+#include <avr/interrupt.h>
+
+#include <avr/sleep.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+
 // Referenz: https://www.elektronik-labor.de/AVR/LPtiny85/LPtiny85_8.html
+
+/*
+
+CrefPin -------+
+              ---  Cref
+              ---
+CxPin ---------+
+              ---
+              ---  Cx
+GND -----------+
+
+*/
+/*
+
+Cr  -----------+
+              ---  Cref
+              ---
+C+Cr  ---------+
+              ---
+              ---  Cx
+C-  -----------+
+
+*/
+
 
 class capaMeasure
 {
