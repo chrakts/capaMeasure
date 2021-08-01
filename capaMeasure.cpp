@@ -1,4 +1,4 @@
-#include "Bewaesserungsstation.h"
+//#include "BodenfeuchteSensor.h"
 #include "capaMeasure.h"
 #include <avr/cpufunc.h>
 
@@ -26,7 +26,7 @@ register uint8_t aBit,bBit;
   locPort->DIRSET = bBit | aBit; // A und B Ausgang
   uint16_t c0 = 1000;
   cli();
-  for(i=0;i<1500;i++)
+  for(i=0;i<3000;i++)
   {
     locPort->DIRCLR = bBit; // Eingang hochohmig?
     locPort->OUTSET = aBit;
@@ -38,7 +38,6 @@ register uint8_t aBit,bBit;
 
     if( (locPort->IN & (bBit)) == 0 )
     {
-      sei();
       break;
     }
     locPort->DIRCLR   = aBit;    // A Eingang
@@ -47,10 +46,12 @@ register uint8_t aBit,bBit;
     locPort->DIRSET = bBit;
     //_delay_us(1);
   }
+  sei();
   PORTCFG.MPCMASK  = aBit | bBit;  // A und B Pullups aus
   locPort->PIN0CTRL = 0;
   locPort->OUTCLR   = bBit | aBit;
   locPort->DIRSET   = bBit | aBit;   // A und B Ausgang
+  //locPort->DIRCLR   = bBit | aBit;   // diese Zeile war nicht drin ##############
   //return(7500.0/i);
   return(i);
 }
