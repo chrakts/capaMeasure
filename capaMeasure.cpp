@@ -1,4 +1,3 @@
-//#include "BodenfeuchteSensor.h"
 #include "capaMeasure.h"
 #include <avr/cpufunc.h>
 
